@@ -85,19 +85,19 @@ function App() {
       <div className="container text-center mt-5">
         <h1>Gallery</h1>
         <div className="row">
-          <div class="card" style={{ width: "18rem" }}>
-            <img
-              src="https://via.placeholder.com/200"
-              class="card-img-top"
-              alt="image"
-            />
-            <div class="card-body">
-              <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </p>
-            </div>
-          </div>
+          {Array.apply(null, { length: 9 }).map(() => {
+            return (
+              <div className="col mb-5">
+                <div class="card" style={{ width: "18rem" }}>
+                  <img
+                    src="https://via.placeholder.com/200"
+                    class="card-img-top"
+                    alt="idk"
+                  />
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </>
