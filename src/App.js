@@ -86,7 +86,11 @@ function App() {
         <h1>Gallery</h1>
         <div className="row">
           <div class="card" style={{ width: "18rem" }}>
-            <img src="..." class="card-img-top" alt="..." />
+            <img
+              src="https://via.placeholder.com/200"
+              class="card-img-top"
+              alt="image"
+            />
             <div class="card-body">
               <p class="card-text">
                 Some quick example text to build on the card title and make up
