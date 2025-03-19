@@ -1,8 +1,7 @@
 import "./App.css";
 import Card from "./components/Card";
-import Navbar from "./components/Navbar";
-import UploadForm from "./components/UploadForm";
-import { useEffect, useState, useReducer } from "react";
+import Layout from "./components/Layout";
+import { useReducer, useMemo } from "react";
 
 const photos = [];
 
@@ -31,6 +30,8 @@ function reducer(state, action) {
       return {
         ...state,
         items: [state.inputs, ...state.items],
+        count: state.items.length + 1,
+        inputs: { title: null, file: null, path: null },
       };
     case "setInputs":
       return {
@@ -48,8 +49,7 @@ function reducer(state, action) {
 }
 
 function App() {
-  const [state, dispatch] = useReducer(useReducer, initialState);
-  const [count, setCount] = useState();
+  const [state, dispatch] = useReducer(reducer, initialState);
   const toggle = (bool) => dispatch({ type: "collapsed", payload: { bool } });
   const handleOnChange = (e) =>
     dispatch({ type: "setInputs", payload: { value: e } });
@@ -59,38 +59,27 @@ function App() {
     toggle(!state.isCollapsed);
   };
 
-  useEffect(() => {
-    setCount(
-      `You have ${state.items.length} image${state.items.length > 1 ? "s" : ""}`
-    );
+  const count = useMemo(() => {
+    return `You have ${state.items.length} image${
+      state.items.length > 1 ? "s" : ""
+    }`;
   }, [state.items]);
 
   return (
-    <>
-      <Navbar />
-      <div className="container text-center mt-5">
-        <button
-          className="btn btn-success float-end"
-          onClick={() => toggle(!state.isCollapsed)}
-        >
-          {state.isCollapsed ? "Close" : "+ Add"}
-        </button>
-        <div className="clearfix mb-4"></div>
-        <UploadForm
-          inputs={state.inputs}
-          isVisible={state.isCollapsed}
-          onChange={handleOnChange}
-          onSubmit={handleOnSubmit}
-        />
-        {count}
-        <h1>Gallery</h1>
-        <div className="row">
-          {state.items.map((photo, index) => (
-            <Card key={index} src={photo.path} />
-          ))}
-        </div>
+    <Layout
+      state={state}
+      onChange={handleOnChange}
+      onSubmit={handleOnSubmit}
+      toggle={toggle}
+    >
+      <h1 className="text-center">Gallery</h1>
+      {count}
+      <div className="row">
+        {state.items.map((item, index) => (
+          <Card key={index} {...item} />
+        ))}
       </div>
-    </>
+    </Layout>
   );
 }
 
