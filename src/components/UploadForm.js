@@ -1,15 +1,17 @@
 import { useMemo, useContext } from "react";
 import { Context } from "../context";
 
-const Preview = ({ path }) => {
+const Preview = () => {
+  const { state } = useContext(Context);
+  const { inputs } = state;
   return (
-    path && (
+    inputs.path && (
       <div
         className="rounded p-1 m-5"
         style={{
           width: "30%",
           height: "300px",
-          backgroundImage: `url(${path}`,
+          backgroundImage: `url(${inputs.path}`,
           backgroundSize: "cover",
         }}
       ></div>
@@ -34,7 +36,7 @@ const UploadForm = () => {
       <>
         <p className="display-6 text-center mb-3">Upload Stock Image</p>
         <div className="mb-5 d-flex align-items-center justify-content-center">
-          <Preview {...state.inputs} />
+          <Preview />
           <form
             className="mb-2"
             style={{ textAlign: "left" }}
