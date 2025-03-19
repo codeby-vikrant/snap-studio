@@ -9,7 +9,7 @@ const UploadForm = ({isVisible}) => {
               type="text"
               className="form-control"
               name="title"
-              placeholder="title"
+              placeholder="Title"
               aria-describedby="text"
             />
           </div>
