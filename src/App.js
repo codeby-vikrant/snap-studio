@@ -36,7 +36,7 @@ function App() {
       <Navbar />
       <div className="container text-center mt-5">
         <button className="btn btn-success float-end" onClick={toggle}>
-          {isCollapsed ? "Close" : "+Add"}
+          {isCollapsed ? "Close" : "+ Add"}
         </button>
         <div className="clearfix mb-4"></div>
         <UploadForm
