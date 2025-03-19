@@ -26,6 +26,8 @@ function App() {
   const handleOnSubmit = (e) => {
     e.preventDefault();
     setItems([inputs.path, ...items]);
+    setInputs({ title: null, file: null, path: null });
+    collapsed(false);
   };
   useEffect(() => {
     setCount(`You have ${items.length} image${items.length > 1 ? "s" : ""}`);
