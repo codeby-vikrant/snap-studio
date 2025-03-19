@@ -1,4 +1,4 @@
-const UploadForm = ({ isVisible, onChange, onSubmit }) => {
+const UploadForm = ({ inputs, isVisible, onChange, onSubmit }) => {
   return (
     isVisible && (
       <>
