@@ -5,16 +5,7 @@ import { Context } from "./context";
 import { useMemo, useContext } from "react";
 
 function App() {
-  const { dispatch, state } = useContext(Context);
-  const toggle = (bool) => dispatch({ type: "collapsed", payload: { bool } });
-  const handleOnChange = (e) =>
-    dispatch({ type: "setInputs", payload: { value: e } });
-  const handleOnSubmit = (e) => {
-    e.preventDefault();
-    dispatch({ type: "setItem" });
-    toggle(!state.isCollapsed);
-  };
-
+  const { state } = useContext(Context);
   const count = useMemo(() => {
     return `You have ${state.items.length} image${
       state.items.length > 1 ? "s" : ""
@@ -22,12 +13,7 @@ function App() {
   }, [state.items]);
 
   return (
-    <Layout
-      state={state}
-      onChange={handleOnChange}
-      onSubmit={handleOnSubmit}
-      toggle={toggle}
-    >
+    <Layout>
       <h1 className="text-center">Gallery</h1>
       {count}
       <div className="row">
