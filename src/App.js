@@ -3,12 +3,9 @@ import Card from "./components/Card";
 import Layout from "./components/Layout";
 import { Context } from "./context";
 import { useMemo, useContext, useEffect } from "react";
-import Firestore from "../handlers/firestore";
-
-const { readDocs } = Firestore;
 
 function App() {
-  const { state } = useContext(Context);
+  const { state, read } = useContext(Context);
   const count = useMemo(() => {
     return `You have ${state.items.length} image${
       state.items.length > 1 ? "s" : ""
@@ -16,7 +13,7 @@ function App() {
   }, [state.items]);
 
   useEffect(() => {
-    readDocs().then(console.log);
+    read();
   });
 
   return (
