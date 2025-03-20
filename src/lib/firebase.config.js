@@ -11,5 +11,15 @@ const firebaseConfig = {
   measurementId: "G-6492RD4NNW",
 };
 
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+const app = () => {
+  if (!firebaseConfig || !firebaseConfig.apiKey) {
+    throw new Error(
+      "No firebase configuration object provided." +
+        "\n" +
+        "Add your web app's configuration object to firebase.config.js"
+    );
+  } else {
+    console.log("Firebase initialized successfully");
+  }
+  return initializeApp(firebaseConfig);
+};
