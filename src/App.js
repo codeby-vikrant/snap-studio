@@ -1,9 +1,8 @@
 import "./App.css";
-import app from "./lib/firebase.config";
 import Card from "./components/Card";
 import Layout from "./components/Layout";
 import { Context } from "./context";
-import { useMemo, useContext, useEffect } from "react";
+import { useMemo, useContext } from "react";
 
 function App() {
   const { state } = useContext(Context);
@@ -12,10 +11,6 @@ function App() {
       state.items.length > 1 ? "s" : ""
     }`;
   }, [state.items]);
-
-  useEffect(() => {
-    app();
-  }, []);
 
   return (
     <Layout>

@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCN4gpaAXlZxCZuaNscmoMYboh5xNr45f0",
@@ -9,18 +10,6 @@ const firebaseConfig = {
   appId: "1:204455033669:web:4a57be83fa2addbdc79c2c",
   measurementId: "G-6492RD4NNW",
 };
-
-const app = () => {
-  if (!firebaseConfig || !firebaseConfig.apiKey) {
-    throw new Error(
-      "No firebase configuration object provided." +
-        "\n" +
-        "Add your web app's configuration object to firebase.config.js"
-    );
-  } else {
-    console.log("Firebase initialized successfully");
-  }
-  return initializeApp(firebaseConfig);
-};
-
+const app = initializeApp(firebaseConfig);
+export const db = getFirestore(app);
 export default app;
