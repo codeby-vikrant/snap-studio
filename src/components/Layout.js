@@ -5,6 +5,7 @@ import { Context } from "../context/FirestoreContext";
 
 function Layout({ children }) {
   const { dispatch, state } = useContext(Context);
+  const { isCollapsed: isVisible, inputs } = state;
   const toggle = (bool) => dispatch({ type: "collapsed", payload: { bool } });
   return (
     <>
@@ -12,12 +13,12 @@ function Layout({ children }) {
       <div className="container mt-5">
         <button
           className="btn btn-success float-end"
-          onClick={() => toggle(!state.isCollapsed)}
+          onClick={() => toggle(!isVisible)}
         >
-          {state.isCollapsed ? "Close" : "+ Add"}
+          {isVisible ? "Close" : "+ Add"}
         </button>
         <div className="clearfix mb-4"></div>
-        <UploadForm inputs={state.inputs} isVisible={state.isCollapsed} />
+        <UploadForm inputs={inputs} isVisible={isVisible} />
         {children}
       </div>
     </>

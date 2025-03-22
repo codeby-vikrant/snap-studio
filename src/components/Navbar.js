@@ -72,7 +72,7 @@ function Dropdown() {
 
   return (
     <ul className="navbar-nav mb-2 mb-lg-0">
-      {""}
+      {" "}
       <li className="nav-item dropdown">
         <a
           className="nav-link dropdown-toggle"
