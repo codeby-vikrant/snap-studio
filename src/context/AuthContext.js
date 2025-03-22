@@ -18,6 +18,7 @@ const AuthProvider = ({ children }) => {
     () => signOut().then(() => setCurrentUser(null)),
     []
   );
+
   const authenticate = useCallback(
     () => getCurrentUser().then(setCurrentUser),
     []
