@@ -7,10 +7,7 @@ import reportWebVitals from "./reportWebVitals";
 import Provider from "./context/FirestoreContext";
 import AuthProvider from "./context/AuthContext";
 import Layout from "./components/Layout";
-
-function Stocks() {
-  return <h1>My Stock Images</h1>;
-}
+import Stocks from "./components/Stocks";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
