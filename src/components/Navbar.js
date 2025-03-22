@@ -56,6 +56,20 @@ function Dropdown() {
   const username = useMemo(() => {
     return currentUser?.displayName || "Profile";
   }, [currentUser]);
+  const avatar = useMemo(() => {
+    return !!currentUser ? (
+      <img
+        className="avatar"
+        src={currentUser?.photoURL}
+        alt={currentUser?.displayName}
+        width="34"
+        height="34"
+      />
+    ) : (
+      "Login"
+    );
+  }, [currentUser]);
+
   return (
     <ul className="navbar-nav mb-2 mb-lg-0">
       {""}
@@ -68,7 +82,7 @@ function Dropdown() {
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
-          Login
+          {avatar}
         </a>
         <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
           <li>
