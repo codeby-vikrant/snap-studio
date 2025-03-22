@@ -2,6 +2,7 @@ import { useMemo, useContext } from "react";
 import { Context } from "../context/FirestoreContext";
 import Firestore from "../handlers/firestore";
 import Storage from "../handlers/storage";
+import { useAuthContext } from "../context/AuthContext";
 
 const { writeDoc } = Firestore;
 const { uploadFile, downloadFile } = Storage;
@@ -28,15 +29,20 @@ const Preview = () => {
 
 const UploadForm = () => {
   const { dispatch, state } = useContext(Context);
+  const currentUser = useAuthContext();
   const { isCollapsed: isVisible, inputs } = state;
   const handleOnChange = (e) =>
     dispatch({ type: "setInputs", payload: { value: e } });
+  const username = currentUser?.displayName.split(" ").join("");
   const handleOnSubmit = (e) => {
     e.preventDefault();
     uploadFile(state.inputs)
       .then(downloadFile)
       .then((url) => {
-        writeDoc({ ...inputs, path: url }, "stocks").then(() => {
+        writeDoc(
+          { ...inputs, path: url, user: username.toLowerCase() },
+          "stocks"
+        ).then(() => {
           dispatch({ type: "setItem" });
           dispatch({ type: "collapsed", payload: { bool: false } });
         });
@@ -44,10 +50,10 @@ const UploadForm = () => {
   };
 
   const isDisabled = useMemo(() => {
-    return !!Object.values(state.inputs).some((input) => !input);
-  }, [state.inputs]);
+    return !!Object.values(inputs).some((input) => !input);
+  }, [inputs]);
   return (
-    state.isCollapsed && (
+    isVisible && (
       <>
         <p className="display-6 text-center mb-3">Upload Stock Image</p>
         <div className="mb-5 d-flex align-items-center justify-content-center">
