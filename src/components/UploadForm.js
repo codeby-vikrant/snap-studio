@@ -39,13 +39,12 @@ const UploadForm = () => {
     uploadFile(state.inputs)
       .then(downloadFile)
       .then((url) => {
-        writeDoc(
-          { ...inputs, path: url, user: username.toLowerCase() },
-          "stocks"
-        ).then(() => {
-          dispatch({ type: "setItem" });
-          dispatch({ type: "collapsed", payload: { bool: false } });
-        });
+        writeDoc({ ...inputs, path: url, user: username }, "stocks").then(
+          () => {
+            dispatch({ type: "setItem" });
+            dispatch({ type: "collapsed", payload: { bool: false } });
+          }
+        );
       });
   };
 
