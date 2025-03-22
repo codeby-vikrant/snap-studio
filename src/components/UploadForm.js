@@ -33,7 +33,7 @@ const UploadForm = () => {
   const { isCollapsed: isVisible, inputs } = state;
   const handleOnChange = (e) =>
     dispatch({ type: "setInputs", payload: { value: e } });
-  const username = currentUser?.displayName.split(" ").join("");
+  const username = currentUser?.displayName;
   const handleOnSubmit = (e) => {
     e.preventDefault();
     uploadFile(state.inputs)

@@ -1,10 +1,10 @@
 import { useMemo } from "react";
 
-function Card({ path, title, createdAt }) {
+function Card({ path, title, createdAt, user }) {
   const timestamp = useMemo(() => {
     const date = `${new Date(createdAt.seconds * 1000)}`.split(" ");
     return `${date[1]} ${date[2]} ${date[3]}`;
-  }, []);
+  }, [createdAt]);
   return (
     <div className="col mb-5">
       <div className="card" style={{ width: "18rem" }}>
@@ -19,7 +19,7 @@ function Card({ path, title, createdAt }) {
         <h5 className="text-center mt-1">{title}</h5>
         <div className="d-flex justify-content-betweeen p-2">
           <p>{timestamp}</p>
-          <i>@username</i>
+          <i>(`@${user}`)</i>
         </div>
       </div>
     </div>
