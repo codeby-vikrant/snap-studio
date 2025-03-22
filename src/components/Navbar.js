@@ -1,9 +1,10 @@
+import { useMemo } from "react";
 import { useAuthContext } from "../context/AuthContext";
 
 const LogIn = () => {
   const { login, currentUser } = useAuthContext();
   return (
-    !currentUser ?? (
+    !currentUser && (
       <button type="button" className="btn btn-warning" onClick={login}>
         Login
       </button>
@@ -51,6 +52,10 @@ function SearchForm() {
 }
 
 function Dropdown() {
+  const { currentUser } = useAuthContext();
+  const username = useMemo(() => {
+    return currentUser?.displayName || "Profile";
+  }, [currentUser]);
   return (
     <ul className="navbar-nav mb-2 mb-lg-0">
       {""}
@@ -68,7 +73,7 @@ function Dropdown() {
         <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
           <li>
             <a className="dropdown-item text-center" href="/">
-              Profile
+              {username}
             </a>
             <li>
               <hr className="dropdown divider" />
