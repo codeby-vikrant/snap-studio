@@ -15,10 +15,12 @@ const Profile = () => {
         ></img>
         <ul className="list-group mx-5">
           <li className="list-group-item">
-            <span className="fs-5 text-capitialize">name:</span>---
+            <span className="fs-5 text-capitialize">name:</span>
+            {currentUser?.displayName}
           </li>
           <li className="list-group-item">
-            <span className="fs-5 text-capitialize">email:</span>---
+            <span className="fs-5 text-capitialize">email:</span>
+            {currentUser?.email}
           </li>
           <li className="list-group-item">
             <span className="fs-5 text-capitialize"></span>---
