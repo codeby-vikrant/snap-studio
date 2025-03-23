@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useAuthContext } from "../context/AuthContext";
 import { Link, useLocation } from "react-router-dom";
 
@@ -67,9 +67,16 @@ function Navigation() {
 }
 
 function SearchForm() {
+  const { text, search } = useState(null);
+  const handleOnChange = (e) => search(e.target.value);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(`Searching ${text}`);
+  };
   return (
-    <form className="d-flex">
+    <form className="d-flex" onSubmit={handleSubmit}>
       <input
+        onChange={handleOnChange}
         className="form-control me-2"
         type="search"
         placeholder="Search"
